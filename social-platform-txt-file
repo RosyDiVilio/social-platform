@@ -1,0 +1,34 @@
+QUERY SOCIAL PLATFORM
+
+1. select distinctrow users.id, users.username, medias.`type` 
+from users 
+inner join medias 
+on users.id = medias.user_id 
+where medias.`type` = "video"
+
+2. select *
+from posts left join likes 
+on posts.id = likes.post_id
+where post_id is null 
+
+3. select post_id as post, count(likes.post_id) as like_dei_post
+from likes 
+group by post_id
+
+4. select distinctrow users.id, users.username, count(medias.user_id) as "numero dei media"
+from users
+inner join medias 
+on users.id = medias.user_id
+inner join media_post 
+on medias.user_id = media_post.media_id
+group by users.id
+order by count(medias.user_id)
+
+5. select distinctrow users.id, users.username, count(likes.post_id) as "like"
+from users 
+inner join posts 
+on users.id = posts.user_id 
+inner join likes 
+on posts.id = likes.post_id
+group by users.id
+order by count(likes.post_id)
